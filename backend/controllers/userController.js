@@ -33,8 +33,43 @@ exports.signup = (req, res) => {
       status: "success",
       // token,
       data: {
-        user: result,
+        userId: result.insertId,
       },
+    });
+  });
+};
+
+exports.login = (req, res) => {
+  const { email, password } = req.body;
+
+  if (password.length < 6) {
+    res.status(500).json({
+      status: "fail",
+      message: "Password must be longer than 6 charecters",
+    });
+  }
+
+  if (!validator.isEmail(email)) {
+    res.status(500).json({
+      status: "fail",
+      message: "Invalid email provided",
+    });
+  }
+
+  const sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+
+  db.query(sql, [email, password], (err, result) => {
+    if (err) {
+      res.status(500).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+
+    res.status(201).json({
+      status: "success",
+      // token,
+      data: result[0],
     });
   });
 };
