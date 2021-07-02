@@ -20,11 +20,12 @@ exports.signup = (req, res) => {
 
   const sql = "INSERT INTO user SET ?";
 
-  db.query(sql, req.body, (err, row, fields) => {
+  db.query(sql, req.body, (err, result) => {
     if (err) {
       res.status(500).json({
         status: "fail",
-        message: err,
+        message:
+          err.code === "ER_DUP_ENTRY" ? "User already exists!" : err.message,
       });
     }
 
@@ -32,7 +33,7 @@ exports.signup = (req, res) => {
       status: "success",
       // token,
       data: {
-        user: row,
+        user: result,
       },
     });
   });
