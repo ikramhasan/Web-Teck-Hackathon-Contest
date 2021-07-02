@@ -1,0 +1,24 @@
+{
+  "name": "blog_app_hackathon",
+  "version": "1.0.0",
+  "description": "A blog app made for the web hackathon contest",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "server",
+    "blog",
+    "sql"
+  ],
+  "author": "Ikram Hasan",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "validator": "^13.6.0"
+  }
+}
