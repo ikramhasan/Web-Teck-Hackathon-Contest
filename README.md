@@ -17,7 +17,6 @@
 
 A blog site made for the web tech hackathon contest.
 
-Try this markdown:
 
 ![alt text](images/screenshot.png)
 
