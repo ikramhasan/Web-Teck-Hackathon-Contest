@@ -33,7 +33,7 @@ exports.createBlog = (req, res) => {
       user_id: blog.user_id,
       vote_count: 0,
       image_url: blog.image_url,
-      createdAt: Date.now(),
+      createdAt: new Date(),
       tag: blog.tag,
       time_to_read: stats.text,
     },
