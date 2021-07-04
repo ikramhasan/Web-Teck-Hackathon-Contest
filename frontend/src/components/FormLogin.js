@@ -30,7 +30,7 @@ const FormLogin = () => {
   return user ? (
     <Redirect
       to={{
-        pathname: "/home",
+        pathname: "/",
         state: user,
       }}
     />

@@ -32,11 +32,15 @@ const PostModal = (props) => {
       caption: editorText,
       user_id: props.user.user_id,
       tag: tagData,
-      image_url: shareImage.name,
+      image_url: shareImage,
     });
 
     console.log(postData);
     createBlog(postData);
+  };
+
+  const handleImageLink = (e) => {
+    setShareImage(e.target.value);
   };
 
   const createBlog = (post) => {
@@ -52,7 +56,7 @@ const PostModal = (props) => {
   return postCreated ? (
     <Redirect
       to={{
-        pathname: "/home",
+        pathname: "/",
         state: props.user,
       }}
     />
@@ -90,6 +94,12 @@ const PostModal = (props) => {
               <div>
                 <UploadImage>
                   <input
+                    type="text"
+                    style={{ padding: "6px 2px" }}
+                    placeholder="your image link here"
+                    onChange={(e) => handleImageLink(e)}
+                  />
+                  {/* <input
                     type="file"
                     accept="image/gif, image/jpeg, image/png"
                     name="image"
@@ -99,7 +109,7 @@ const PostModal = (props) => {
                   />
                   <p>
                     <label htmlFor="file">Add image</label>
-                  </p>
+                  </p> */}
                   {/* {shareImage && <img src={URL.createObjectURL(shareImage)} />} */}
                 </UploadImage>
                 <SetTag>
@@ -116,12 +126,13 @@ const PostModal = (props) => {
                   </select> */}
                   <input
                     type="text"
+                    style={{ padding: "6px 2px" }}
                     placeholder="Your tag here"
                     onChange={(e) => setTagData(e.target.value)}
                   />
                 </SetTag>
               </div>
-              {shareImage && <img src={URL.createObjectURL(shareImage)} />}
+              {shareImage && <img src={shareImage} />}
             </SharedContent>
             <PostBtn onClick={handlePost}>
               <a>Post</a>

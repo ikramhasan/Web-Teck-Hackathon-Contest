@@ -18,7 +18,7 @@ function App() {
             <FormSignup />
           </Route>
           <Route
-            path="/home"
+            path="/"
             render={(props) => (
               <div>
                 <Header {...props} /> <Home {...props} />
