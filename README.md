@@ -17,7 +17,6 @@
 
 A blog site made for the web tech hackathon contest.
 
-
 ![alt text](images/screenshot.png)
 
 ### Built With
@@ -28,4 +27,4 @@ A blog site made for the web tech hackathon contest.
 
 ### Submission
 
-Find our video presentation [here](https://drive.google.com/file/d/1iKJW-LZ-8muISjlivfbYsO9-0hA27ubQ/view?usp=sharing)
+### Find our video presentation [here](https://drive.google.com/file/d/1iKJW-LZ-8muISjlivfbYsO9-0hA27ubQ/view?usp=sharing)
