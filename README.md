@@ -17,7 +17,9 @@
 
 A blog site made for the web tech hackathon contest.
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Try this markdown:
+
+![alt text](images/screenshot.png)
 
 ### Built With
 
