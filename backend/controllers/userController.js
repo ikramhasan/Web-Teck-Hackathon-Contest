@@ -40,7 +40,7 @@ exports.signup = (req, res) => {
 };
 
 exports.login = (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.query;
 
   if (password.length < 6) {
     res.status(500).json({
@@ -66,7 +66,7 @@ exports.login = (req, res) => {
       });
     }
 
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       // token,
       data: result[0],
