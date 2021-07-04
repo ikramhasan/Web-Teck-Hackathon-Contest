@@ -38,11 +38,13 @@ exports.createBlog = (req, res) => {
       time_to_read: stats.text,
     },
     (err, result) => {
-      res.status(201).json({
-        status: "success",
-        // token,
-        data: result,
-      });
+      if (!err) {
+        res.status(201).json({
+          status: "success",
+          // token,
+          data: result,
+        });
+      }
     }
   );
 };
