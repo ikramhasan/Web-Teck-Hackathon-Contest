@@ -38,14 +38,6 @@ exports.createBlog = (req, res) => {
       time_to_read: stats.text,
     },
     (err, result) => {
-      if (err) {
-        res.status(500).json({
-          status: "fail",
-          message:
-            err.code === "ER_DUP_ENTRY" ? "User already exists!" : err.message,
-        });
-      }
-
       res.status(201).json({
         status: "success",
         // token,
