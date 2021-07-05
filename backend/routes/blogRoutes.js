@@ -4,7 +4,8 @@ const blogController = require("../controllers/blogController");
 
 router
   .get("/", blogController.getAllBlogs)
-  .post("/new", blogController.createBlog);
+  .post("/new", blogController.createBlog)
+  .get("/vote", blogController.vote);
 
 router.route("/:id");
 
