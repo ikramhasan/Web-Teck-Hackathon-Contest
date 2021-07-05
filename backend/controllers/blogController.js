@@ -50,7 +50,7 @@ exports.createBlog = (req, res) => {
   );
 };
 
-exports.vote = (res, req) => {
+exports.vote = (req, res) => {
   const sql = "UPDATE blog SET vote_count = ? WHERE blog_id = ?";
   console.log(req.body);
   const { vote_count, blog_id } = req.body;
