@@ -1,86 +1,77 @@
 import React, { useState, useEffect } from "react";
-import PostModal from "../components/PostModal";
 import styled from "styled-components";
 import ReactTooltip from "react-tooltip";
-import Blog from "../components/Blog.js";
 import Axios from "axios";
 
-const Home = (props) => {
-  console.log(props.location.state);
-  const [data, setData] = useState([]);
-  const [showModal, setShowModal] = useState("close");
+const Blog = (props) => {
+  const [userUpdatedVote, setUserUpdatedVote] = useState(false);
 
-  const user = props.location.state;
+  let new_vote_count = 1;
 
-  useEffect(() => {
-    Axios.get("https://webtechhackathon.herokuapp.com/api/v1/blogs").then(
-      (response) => {
-        setData(response.data.data);
-      }
-    );
-  }, []);
+  const voteIncrement = (vote_count, blog_id) => {
+    //Increment vote count
+    new_vote_count = vote_count * 1 + 1;
 
-  /* bringData(); */
-  const handleCreatePostClick = (e) => {
-    e.preventDefault();
-
-    /*     if (e.target !== e.currentTarget) {
-      return;
-    } */
-
-    switch (showModal) {
-      case "open":
-        setShowModal("close");
-        break;
-      case "close":
-        setShowModal("open");
-        break;
-      default:
-        setShowModal("close");
-        break;
-    }
+    const vote = { vote_count: new_vote_count, blog_id: blog_id };
+    setUserUpdatedVote(new_vote_count);
+    Axios.get(
+      "https://webtechhackathon.herokuapp.com/api/v1/blogs/vote",
+      vote
+    ).then((response) => {
+      console.log(response.data);
+    });
+    //api request to store vote count in sql
   };
-
   return (
-    <Container>
-      <div>
-        <HeroLine>✍ The only blog you will ever need ✍</HeroLine>
-        <Content>
-          <MainContent>
-            <div>
-              {data.map((blog) => (
-                <Blog key={blog.blog_id} blog={blog} user={user} />
-              ))}
-            </div>
-          </MainContent>
-          <RightContent>
-            <CreatePostbtn
-              onClick={
-                !user ? console.log("can't create post") : handleCreatePostClick
-              }
-              data-tip
-              data-for={!user ? "loginTip" : ""}
-            >
-              <span>Create a Post</span>
-              <i className="far fa-plus-square"></i>
-
-              <ReactTooltip id="loginTip" place="top" effect="solid">
-                Login and you will be able to create a post
-              </ReactTooltip>
-            </CreatePostbtn>
-          </RightContent>
-        </Content>
-      </div>
-      <PostModal
-        showModal={showModal}
-        handleCreatePostClick={handleCreatePostClick}
-        user={user}
-      />
-    </Container>
+    <PostContainer key={props.blog.blog_id}>
+      <PostHeader>
+        <BloggerImg>
+          <img src="/images/user-icon.svg" alt="" />
+        </BloggerImg>
+        <BloggerDescription>
+          <BloggerName>{props.blog.name}</BloggerName>
+          <BloggerEmail>{props.blog.email}</BloggerEmail>
+        </BloggerDescription>
+      </PostHeader>
+      <PostDescription>
+        <div>{props.blog.caption}</div>
+      </PostDescription>
+      <PostImage>
+        <img src={props.blog.image_url} alt="" />
+      </PostImage>
+      <PostFooter>
+        <Postcharacteristics>
+          <ul>
+            <li>
+              {userUpdatedVote ? userUpdatedVote : props.blog.vote_count} votes
+            </li>
+            <li>{props.blog.tag}</li>
+            <li>{props.blog.time_to_read}</li>
+          </ul>
+        </Postcharacteristics>
+        <VoteButton>
+          <button
+            className={!props.user || userUpdatedVote ? "disable-effect" : ""}
+            onClick={(event) =>
+              !props.user || userUpdatedVote
+                ? console.log("disabled")
+                : voteIncrement(
+                    new_vote_count === 1
+                      ? props.blog.vote_count
+                      : new_vote_count,
+                    props.blog.blog_id
+                  )
+            }
+          >
+            <i className="far fa-hand-peace"></i> <span>Vote</span>
+          </button>
+        </VoteButton>
+      </PostFooter>
+    </PostContainer>
   );
 };
 
-export default Home;
+export default Blog;
 
 const Container = styled.div`
   /* background: pink; */

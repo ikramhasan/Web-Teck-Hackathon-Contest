@@ -50,6 +50,7 @@ const PostModal = (props) => {
     ).then((response) => {
       console.log(response);
       setPostCreated(true);
+      window.location.reload();
     });
   };
 
