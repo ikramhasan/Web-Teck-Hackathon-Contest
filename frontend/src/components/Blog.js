@@ -14,12 +14,14 @@ const Blog = (props) => {
 
     const vote = { vote_count: new_vote_count, blog_id: blog_id };
     setUserUpdatedVote(new_vote_count);
-    Axios.get(
+    Axios.post(
       "https://webtechhackathon.herokuapp.com/api/v1/blogs/vote",
       vote
     ).then((response) => {
       console.log(response.data);
+      console.log(vote);
     });
+
     //api request to store vote count in sql
   };
   return (
