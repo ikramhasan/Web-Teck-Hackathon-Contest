@@ -5,6 +5,7 @@ import Axios from "axios";
 
 const Blog = (props) => {
   const [userUpdatedVote, setUserUpdatedVote] = useState(false);
+
   let new_vote_count = 1;
 
   const voteIncrement = (vote_count, blog_id) => {
@@ -50,9 +51,9 @@ const Blog = (props) => {
         </Postcharacteristics>
         <VoteButton>
           <button
-            className={!props.user ? "disable-effect" : ""}
+            className={!props.user || userUpdatedVote ? "disable-effect" : ""}
             onClick={(event) =>
-              !props.user
+              !props.user || userUpdatedVote
                 ? console.log("disabled")
                 : voteIncrement(
                     new_vote_count === 1
