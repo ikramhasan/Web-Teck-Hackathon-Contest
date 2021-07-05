@@ -23,6 +23,7 @@ exports.getAllBlogs = (req, res) => {
 
 exports.createBlog = (req, res) => {
   const sql = "INSERT INTO blog SET ?";
+
   const blog = req.body;
   const stats = readingTime(blog.caption);
 
@@ -47,4 +48,20 @@ exports.createBlog = (req, res) => {
       }
     }
   );
+};
+
+exports.vote = (res, req) => {
+  const sql = "UPDATE blog SET vote_count = ? WHERE blog_id = ?";
+  console.log(req.body);
+  const { vote_count, blog_id } = req.body;
+
+  db.query(sql, [vote_count, blog_id], (err, result) => {
+    if (!err) {
+      res.status(201).json({
+        status: "success",
+        // token,
+        data: result,
+      });
+    }
+  });
 };
