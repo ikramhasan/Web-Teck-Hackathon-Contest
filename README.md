@@ -5,7 +5,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">its-Blog</h3>
+  <h3 align="center">Its-Blog</h3>
 
   <p align="center">
     A web tech hackathon project
